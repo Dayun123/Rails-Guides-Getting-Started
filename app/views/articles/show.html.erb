@@ -8,5 +8,40 @@
   <%= @article.text %>
 </p>
 
+<%# Display any comments associated with this article  %>
+<h2>Comments:</h2>
+
+<%# Since articles have a has_many association with comments, the @article object now has a .comments method that returns an array of all comments associated with this article. Here, we loop through the associated comments and display the attributes of each comment, which are :commenter and :body.  %>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<%# Create a form to post a comment related to this Article  %>
+<h2>Add a comment:</h2>
+
+<%# We pass an array as the model: attribute because we have nested routes in our config/routes.rb file. To post a comment, we send a POST request to the following url /articles/:id/comments, so we need to build a comment based off of this article to pass in with the form.  %>
+<%= form_with(model: [@article, @article.comments.build], local: true) do |form| %>
+  <p>
+    <%= form.label :commenter %>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+
+
+<% end %>
+
 <%= link_to 'All Articles', articles_path %>
 <%= link_to 'Edit Article', edit_article_path(@article) %>
