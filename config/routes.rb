@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  resources :articles
+  # creates a nested resource where paths to comments are prefixed by the article they belong to. This is a neccessary step to take after setting up an association between articles and comments where an article has_many comments and a comment belongs_to an article.
+  resources :articles do
+    resources :comments
+  end
 
   root 'welcome#index'
 
