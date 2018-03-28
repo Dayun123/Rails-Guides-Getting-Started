@@ -7,3 +7,8 @@
   <strong>Comment:</strong>
   <%= comment.body %>
 </p>
+
+<%# Add a link to destroy this comment. The second param, [comment.article, comment] is used in place of an explicit call to article_comment_path(comment.article, comment). Rails can infer that we want that path by the array params passed in. This is slick, but I prefer calling the url or path helper and passindg in two params, as it makes more sense and works for more paths. If we wanted the edit path for this comment, we would have to pass in the action we are targeting as the first array index, like so. [:edit, comment.article, comment]. I think edit_article_comment_path(comment.article, comment) is easier to understand.  %>
+<%= link_to 'Destroy Comment', [comment.article, comment],
+                                method: :delete,
+                                data: { confirm: "Are you sure?" } %>
