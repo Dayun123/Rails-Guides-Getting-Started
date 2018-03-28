@@ -12,16 +12,21 @@
 <h2>Comments:</h2>
 
 <%# Since articles have a has_many association with comments, the @article object now has a .comments method that returns an array of all comments associated with this article. Here, we loop through the associated comments and display the attributes of each comment, which are :commenter and :body.  %>
-<% @article.comments.each do |comment| %>
+<!--
+<%# @article.comments.each do |comment| %>
   <p>
     <strong>Commenter:</strong>
-    <%= comment.commenter %>
+    <%# comment.commenter %>
   </p>
   <p>
     <strong>Comment:</strong>
-    <%= comment.body %>
+    <%# comment.body %>
   </p>
-<% end %>
+<%# end %>
+-->
+
+<%# Here, we move the html and erb for displaying a comment into a partial named app/views/comments/_comment.html.erb. Using render, we can pass it a collection of comments associated with this article, and it will pass each comment as the variable comment (because the partial is named _comment) to the partial to be rendered. This effectively creates the same .each statement as the commented-out portion above. %>
+<%= render @article.comments %>
 
 <%# Create a form to post a comment related to this Article  %>
 <h2>Add a comment:</h2>
