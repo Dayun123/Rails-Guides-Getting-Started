@@ -32,21 +32,25 @@
 <h2>Add a comment:</h2>
 
 <%# We pass an array as the model: attribute because we have nested routes in our config/routes.rb file. To post a comment, we send a POST request to the following url /articles/:id/comments, so we need to build a comment based off of this article to pass in with the form.  %>
-<%= form_with(model: [@article, @article.comments.build], local: true) do |form| %>
+<!--
+<%#= form_with(model: [@article, @article.comments.build], local: true) do |form| %>
   <p>
-    <%= form.label :commenter %>
-    <%= form.text_field :commenter %>
+    <%#= form.label :commenter %>
+    <%#= form.text_field :commenter %>
   </p>
   <p>
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%#= form.label :body %>
+    <%#= form.text_area :body %>
   </p>
   <p>
-    <%= form.submit %>
+    <%#= form.submit %>
   </p>
 
+<%# end %>
+-->
 
-<% end %>
+<%# We move the rendering of the form out to a partial located at app/views/comments/_form.html.erb. The @article instace variable will be used in this partial, and is available to it because it was passed to this view by the controller.  %>
+<%= render '/comments/form' %>
 
 <%= link_to 'All Articles', articles_path %>
 <%= link_to 'Edit Article', edit_article_path(@article) %>
