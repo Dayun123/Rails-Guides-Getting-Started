@@ -48,6 +48,17 @@ def update
   end
 end
 
+def destroy
+  # find the Article associated with the id passed in from the url in the params hash
+  @article = Article.find(params[:id])
+
+  # destroy the article
+  @article.destroy
+
+  # redirect to the index action
+  redirect_to articles_path
+end
+
 # anything below the 'private' keyword will only be available to this class
 private
 
