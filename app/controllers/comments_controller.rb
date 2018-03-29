@@ -1,5 +1,9 @@
 class CommentsController < ApplicationController
 
+  # with know authentication setup, anyone can delete any comment from another user. Here, we setup a basic http authentication for when a user wants to delete a comment. Only the admin will be able too.
+  http_basic_authenticate_with name: "admin", password: "pass1234", only: :destroy
+
+
   # create a new comment linked to the article that the comment was made from and redirect to the show view for the article so the user can view the article with their comment present.
   def create
     # retrieve the article from the db that this comment was made on. Since we set up nested routes, the URL will have the article_id in it. Ex: articles/:id/comments.
